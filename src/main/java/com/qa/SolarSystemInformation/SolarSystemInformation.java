@@ -17,8 +17,10 @@ public class SolarSystemInformation {
 
         if (userId.matches("[A-Z]{2}[0-9](?!0000)")) {
             this.userId = userId;
+            System.out.println("valid format");
         }
-        else this.userId = "invalid password";
+        else this.userId = "invalid userId";
+        System.out.println("invalid format");
     }
 
     public String initialiseAOCDetails(String astronomicalObjectClassificationCode ){

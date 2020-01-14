@@ -28,6 +28,18 @@ public class SolarSystemInformationTest {
         //assert
         assertEquals(true, result);
     }
+    @Test
+    public void test_invalid_userId_displayed_upon_incorrect_userId_input(){
+        //arrange
+        String userId = "1A0123";
+        boolean expectedResult = false;
+        String password = null;
+        SolarSystemInformation cut = new SolarSystemInformation(userId, null);
+        //act
+        boolean result = userId.matches("[A-Z]{2}[0-9](?!0000)");
+        //assert
+        assertEquals(false, result);
+    }
     //@Test
     //public void test_4_consecutive_zeros_not_allowed_in_userId(){}
     //@Test
