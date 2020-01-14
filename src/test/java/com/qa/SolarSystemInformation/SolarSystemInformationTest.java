@@ -9,14 +9,25 @@ public class SolarSystemInformationTest {
         //arrange
         String userId = "RR0123";
         boolean expectedResult = true;
-        SolarSystemInformation cut = new SolarSystemInformation(userId);
+        String password = null;
+        SolarSystemInformation cut = new SolarSystemInformation(userId, null);
         //act
         boolean result = cut.getUserId(Character.isUpperCase(userId.charAt(0)) && Character.isUpperCase(userId.charAt(1)));
         //assert
         assertEquals(true, result);
     }
-    //@Test
-    //public void test_4_subsequent_characters_after_first_2_letters_in_userId_are_digits_between_zero_and_nine(){}
+    @Test
+    public void test_4_subsequent_characters_after_first_2_letters_in_userId_are_digits_between_zero_and_nine(){
+        //arrange
+        String userId = "RR0123";
+        boolean expectedResult = true;
+        String password = null;
+        SolarSystemInformation cut = new SolarSystemInformation(userId, null);
+        //act
+        boolean result = cut.getUserId(Character.isDigit(userId.charAt(2))&&Character.isDigit(userId.charAt(3))&&Character.isDigit(userId.charAt(4))&&Character.isDigit(userId.charAt(5)));
+        //assert
+        assertEquals(true, result);
+    }
     //@Test
     //public void test_4_consecutive_zeros_not_allowed_in_userId(){}
     //@Test

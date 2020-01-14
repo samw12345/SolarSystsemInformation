@@ -12,12 +12,13 @@ public class SolarSystemInformation {
     public BigDecimal semiMajorAxis;
     public BigDecimal mass;
 
-    public SolarSystemInformation(String userId){
-        this.userId = userId;
-    }
 
-    public void SolarSystemInformationTwo(String password){
-        this.password = password;
+    public SolarSystemInformation(String userId, String password) {
+
+        if (userId.matches("[A-Z]{2}[0-9](?!0000)")) {
+            this.userId = userId;
+        }
+        else this.userId = "invalid password";
     }
 
     public String initialiseAOCDetails(String astronomicalObjectClassificationCode ){
@@ -82,5 +83,16 @@ public class SolarSystemInformation {
 
     public boolean getUserId(boolean b) {
         return b;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    private void setPassword(String password) {
+        this.password = password;
+    }
+
+    private void setUserId(String userId) {
+        this.userId = userId;
     }
 }
