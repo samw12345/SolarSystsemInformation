@@ -1,7 +1,7 @@
 package com.qa.SolarSystemInformation;
 
 public class WebService {
-    public boolean authenticate(String userId, String password){
+    public void authenticate(String userId, String password){
         //conditional
        // return true;
 

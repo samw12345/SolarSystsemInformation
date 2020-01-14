@@ -12,10 +12,12 @@ public class SolarSystemInformation {
     public BigDecimal semiMajorAxis;
     public BigDecimal mass;
 
-    public SolarSystemInformation(String userId, String password){
+    public SolarSystemInformation(String userId){
         this.userId = userId;
-        this.password = password;
+    }
 
+    public void SolarSystemInformationTwo(String password){
+        this.password = password;
     }
 
     public String initialiseAOCDetails(String astronomicalObjectClassificationCode ){
@@ -73,5 +75,12 @@ public class SolarSystemInformation {
 
     public void setAstronomicalObjectClassificationCode(String astronomicalObjectClassificationCode) {
         this.astronomicalObjectClassificationCode = astronomicalObjectClassificationCode;
+    }
+
+    public void getUserId() {
+    }
+
+    public boolean getUserId(boolean b) {
+        return b;
     }
 }
