@@ -64,6 +64,18 @@ public class SolarSystemInformationTest {
         //assert
         assertEquals(true, result);
     }
+    @Test
+    public void test_password_too_short(){
+        //arrange
+        String password = "12345ar";
+        boolean expectedResult = false;
+        String userId = "AA1234";
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        //act
+        boolean result = password.length()>=10;
+        //assert
+        assertEquals(expectedResult, result);
+    }
     //@Test
    // public void
 
