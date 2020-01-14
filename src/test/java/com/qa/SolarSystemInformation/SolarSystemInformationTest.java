@@ -9,8 +9,8 @@ public class SolarSystemInformationTest {
         //arrange
         String userId = "RR0123";
         boolean expectedResult = true;
-        String password = null;
-        SolarSystemInformation cut = new SolarSystemInformation(userId, null);
+        String password = "arby12345*/";
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
         //act
         boolean result = cut.getUserId(Character.isUpperCase(userId.charAt(0)) && Character.isUpperCase(userId.charAt(1)));
         //assert
@@ -21,8 +21,8 @@ public class SolarSystemInformationTest {
         //arrange
         String userId = "RR0123";
         boolean expectedResult = true;
-        String password = null;
-        SolarSystemInformation cut = new SolarSystemInformation(userId, null);
+        String password = "arby12345*/";
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
         //act
         boolean result = cut.getUserId(Character.isDigit(userId.charAt(2))&&Character.isDigit(userId.charAt(3))&&Character.isDigit(userId.charAt(4))&&Character.isDigit(userId.charAt(5)));
         //assert
@@ -33,17 +33,37 @@ public class SolarSystemInformationTest {
         //arrange
         String userId = "1A0123";
         boolean expectedResult = false;
-        String password = null;
-        SolarSystemInformation cut = new SolarSystemInformation(userId, null);
+        String password = "arby12345*/";
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
         //act
         boolean result = userId.matches("[A-Z]{2}[0-9](?!0000)");
         //assert
         assertEquals(false, result);
     }
-    //@Test
-    //public void test_4_consecutive_zeros_not_allowed_in_userId(){}
-    //@Test
-    //public void test_password_at_least_10_characters_in_length(){}
+    @Test
+    public void test_4_consecutive_zeros(){
+        //arrange
+        String userId = "AA0000";
+        boolean expectedResult = false;
+        String password = "arby12345*/";
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        //act
+        boolean result = userId.matches("[A-Z]{2}[0-9](?!0000)");
+        //assert
+        assertEquals(false, result);
+    }
+    @Test
+    public void test_password_at_least_10_characters_in_length(){
+        //arrange
+        String password = "arby12345*/";
+        boolean expectedResult = true;
+        String userId = "AA1234";
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        //act
+        boolean result = password.length()>=10;
+        //assert
+        assertEquals(true, result);
+    }
     //@Test
    // public void
 
