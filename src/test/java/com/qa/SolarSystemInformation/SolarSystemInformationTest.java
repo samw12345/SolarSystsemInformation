@@ -1,6 +1,10 @@
 package com.qa.SolarSystemInformation;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.Collections;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SolarSystemInformationTest {
@@ -82,14 +86,60 @@ public class SolarSystemInformationTest {
         String userId = "AA1234";
         String password = "arby12345*/";
         String astronomicalObjectClassificationCode = "SSun27TL";
-        boolean expectedResult = true;
         SolarSystemInformation cut = new SolarSystemInformation(userId, password);
         cut.initialiseAOCDetails(astronomicalObjectClassificationCode);
         //act
         boolean result = astronomicalObjectClassificationCode.matches( "[A-Z][0-9]{0,8}[A-Z][a-z]{2}[0-9]{1,3}(T|M|B|L|TL)");
         //assert
+        assertEquals(true, result);
+    }
+    @Test
+    public void test_initialiseAOCDetails_returns_invalid_format_when_astronomicalObjectClassificationCode_not_correct_format(){
+        //arrange
+        String userId = "AA1234";
+        String password = "arby12345*/";
+        String astronomicalObjectClassificationCode = "Ssun27TL";
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        cut.initialiseAOCDetails(astronomicalObjectClassificationCode);
+        //act
+        boolean result = astronomicalObjectClassificationCode.matches("[A-Z][0-9]{0,8}[A-Z][a-z]{2}[0-9]{1,3}(T|M|B|L|TL)");
+        //assert
+        assertEquals(false, result);
+    }
+    @Test
+    public void test_objectType_returns_valid_object(){
+        //arrange
+        String userId = "AA1234";
+        String password = "arby12345*/";
+        List<String> objectType = Collections.singletonList("Star");
+        boolean expectedResult = true;
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        cut.getObjectType(objectType);
+        //act
+        boolean result = objectType.contains("Star");
+        //assert
         assertEquals(expectedResult, result);
     }
+    @Test
+    public void test_objectType_returns_invalid_object(){
+        //arrange
+        String userId = "AA1234";
+        String password = "arby12345*/";
+        List<String> objectType = Collections.singletonList("rocket");
+        boolean expectedResult = false;
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        cut.getObjectType(objectType);
+        //act
+        boolean result = objectType.contains("Rocket");
+        //assert
+        assertEquals(expectedResult, result);
+    }
+    @Test
+    public void test_objectName_returns_name_of_object(){
+        //arrange
+        
+    }
+
     //@Test
    // public void
 

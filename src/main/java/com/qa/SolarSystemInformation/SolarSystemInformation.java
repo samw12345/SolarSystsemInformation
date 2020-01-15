@@ -1,6 +1,7 @@
 package com.qa.SolarSystemInformation;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class SolarSystemInformation {
     public String userId;
@@ -11,7 +12,22 @@ public class SolarSystemInformation {
     public BigDecimal radius;
     public BigDecimal semiMajorAxis;
     public BigDecimal mass;
+    public List<String> objectType;
 
+    public List<String> getObjectType(List<String> objectType) {
+        return this.objectType;
+    }
+
+    private List<String> setObjectType(List<String> objectType) {
+        objectType.add("Star");
+        objectType.add("Planet");
+        objectType.add("Moon");
+        objectType.add("Dwarf Planet");
+        objectType.add("Asteroid");
+        objectType.add("Comet");
+        this.objectType = objectType;
+        return objectType;
+    }
 
     public SolarSystemInformation(String userId, String password) {
 
@@ -86,8 +102,9 @@ public class SolarSystemInformation {
         return astronomicalObjectClassificationCode;
     }
 
-    public void setAstronomicalObjectClassificationCode(String astronomicalObjectClassificationCode) {
+    private String setAstronomicalObjectClassificationCode(String astronomicalObjectClassificationCode) {
         this.astronomicalObjectClassificationCode = astronomicalObjectClassificationCode;
+        return astronomicalObjectClassificationCode;
     }
 
     public void getUserId() {
@@ -105,7 +122,8 @@ public class SolarSystemInformation {
         this.password = password;
     }
 
-    private void setUserId(String userId) {
+    private String setUserId(String userId) {
         this.userId = userId;
+        return userId;
     }
 }
