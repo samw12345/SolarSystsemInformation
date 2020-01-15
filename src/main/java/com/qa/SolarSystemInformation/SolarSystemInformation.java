@@ -13,8 +13,18 @@ public class SolarSystemInformation {
     public BigDecimal semiMajorAxis;
     public BigDecimal mass;
     public List<String> objectType;
+    public String objectName;
 
-    public List<String> getObjectType(List<String> objectType) {
+
+    public String getObjectName(String objectName) {
+        return this.objectName;
+    }
+
+    private void setObjectName(String objectName) {
+        this.objectName = objectName;
+    }
+
+    public List<String> getObjectType(List<String> objectType) throws invalidObjectException {
         return this.objectType;
     }
 
@@ -82,11 +92,11 @@ public class SolarSystemInformation {
         this.orbitalPeriod = orbitalPeriod;
     }
 
-    public Boolean getExists() {
-        return exists;
+    public Boolean getExists(boolean exists) {
+        return this.exists;
     }
 
-    private void setExists(Boolean exists) {
+    private void setExists(boolean exists) {
         this.exists = exists;
     }
 

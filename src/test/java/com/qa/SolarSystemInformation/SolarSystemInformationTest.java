@@ -2,6 +2,7 @@ package com.qa.SolarSystemInformation;
 
 import org.junit.jupiter.api.Test;
 
+import javax.management.ObjectName;
 import java.util.Collections;
 import java.util.List;
 
@@ -107,7 +108,7 @@ public class SolarSystemInformationTest {
         assertEquals(false, result);
     }
     @Test
-    public void test_objectType_returns_valid_object(){
+    public void test_objectType_returns_valid_object() throws invalidObjectException {
         //arrange
         String userId = "AA1234";
         String password = "arby12345*/";
@@ -121,7 +122,7 @@ public class SolarSystemInformationTest {
         assertEquals(expectedResult, result);
     }
     @Test
-    public void test_objectType_returns_invalid_object(){
+    public void test_objectType_returns_invalid_object() throws invalidObjectException{
         //arrange
         String userId = "AA1234";
         String password = "arby12345*/";
@@ -137,7 +138,32 @@ public class SolarSystemInformationTest {
     @Test
     public void test_objectName_returns_name_of_object(){
         //arrange
-        
+        String userId = "AA1234";
+        String password = "arby12345*/";
+        String objectName = "Ceres";
+        boolean expectedResult = true;
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        cut.getObjectName(objectName);
+        //act
+        boolean result = objectName.contains("Ceres");
+        //assert
+        assertEquals(expectedResult, result);
+    }
+    @Test
+    public void test_exists_field_tells_us_that_ACO_does_exist(){
+        //arrange
+        String userId = "AA1234";
+        String password = "arby12345*/";
+        String astronomicalObjectClassificationCode = "Planet";
+        boolean exists = true;
+        boolean expectedResult = true;
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        cut.getExists(exists);
+        //act
+        boolean result = astronomicalObjectClassificationCode.contains(astronomicalObjectClassificationCode);
+        //assert
+        assertEquals(expectedResult, result);
+
     }
 
     //@Test
