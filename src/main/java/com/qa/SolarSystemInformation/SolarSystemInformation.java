@@ -18,23 +18,26 @@ public class SolarSystemInformation {
         if (userId.matches("[A-Z]{2}[0-9](?!0000)")) {
             this.userId = userId;
 
-        }
-        else this.userId = "invalid userId";
+        } else this.userId = "invalid userId";
 
 
         if (password.length() >= 10) {
             this.password = password;
 
+        } else this.password = "invalid password length";
+
+    }
+
+    public String initialiseAOCDetails(String astronomicalObjectClassificationCode) {
+        if (astronomicalObjectClassificationCode.matches("[A-Z][0-9]{0,8}[A-Z][a-z]{2}[0-9]{1,3}(T|M|B|L|TL)")) {
+            return astronomicalObjectClassificationCode;
+        } else {
+            return "invalid format";
         }
-        else this.password = "invalid password length";
 
     }
 
-    public String initialiseAOCDetails(String astronomicalObjectClassificationCode ){
-
-        return astronomicalObjectClassificationCode;
-    }
-    public String toString(){
+    public String toString() {
 
         return null;
     }
@@ -93,6 +96,7 @@ public class SolarSystemInformation {
     public boolean getUserId(boolean b) {
         return b;
     }
+
     public String getPassword() {
         return password;
     }

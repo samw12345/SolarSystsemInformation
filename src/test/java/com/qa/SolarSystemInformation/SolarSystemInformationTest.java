@@ -76,6 +76,20 @@ public class SolarSystemInformationTest {
         //assert
         assertEquals(expectedResult, result);
     }
+    @Test
+    public void test_initialiseAOCDetails_returns_astronomicalObjectClassificationCode_in_correct_format(){
+        //arrange
+        String userId = "AA1234";
+        String password = "arby12345*/";
+        String astronomicalObjectClassificationCode = "SSun27TL";
+        boolean expectedResult = true;
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        cut.initialiseAOCDetails(astronomicalObjectClassificationCode);
+        //act
+        boolean result = astronomicalObjectClassificationCode.matches( "[A-Z][0-9]{0,8}[A-Z][a-z]{2}[0-9]{1,3}(T|M|B|L|TL)");
+        //assert
+        assertEquals(expectedResult, result);
+    }
     //@Test
    // public void
 
