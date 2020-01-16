@@ -15,6 +15,9 @@ public class SolarSystemInformation {
     public List<String> objectType;
     public String objectName;
 
+    public SolarSystemInformation(String userId, String password) {
+    }
+
 
     public List<String> getObjectType(List<String> objectType) throws invalidObjectException {
         return this.objectType;
@@ -31,7 +34,7 @@ public class SolarSystemInformation {
         return objectType;
     }
 
-    public SolarSystemInformation(String userId, String password) {
+    public SolarSystemInformation(String userId, String password, IWebService webService) {
 
         if (userId.matches("[A-Z]{2}[0-9](?!0000)")) {
             this.userId = userId;
@@ -61,7 +64,7 @@ public class SolarSystemInformation {
         return astronomicalObjectClassificationCode;
     }
 
-    public String getObjectName(String objectName) {
+    public String getObjectName() {
         return this.objectName;
     }
 

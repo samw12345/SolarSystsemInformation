@@ -1,12 +1,12 @@
 package com.qa.SolarSystemInformation;
 
+import org.easymock.EasyMock;
 import org.junit.jupiter.api.Test;
 
-import javax.management.ObjectName;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SolarSystemInformationTest {
     @Test
@@ -101,19 +101,19 @@ public class SolarSystemInformationTest {
         assertEquals(true, result);
     }
 
-    @Test
-    public void test_initialiseAOCDetails_returns_invalid_format_when_astronomicalObjectClassificationCode_not_correct_format() throws invalidUserInputException {
-        //arrange
-        String userId = "AA1234";
-        String password = "arby12345*/";
-        String astronomicalObjectClassificationCode = "Ssun27TL";
-        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
-        cut.initialiseAOCDetails(astronomicalObjectClassificationCode);
-        //act
-        boolean result = astronomicalObjectClassificationCode.matches("[A-Z][0-9]{0,8}[A-Z][a-z]{2}[0-9]{1,3}(T|M|B|L|TL)");
-        //assert
-        assertEquals(false, result);
-    }
+//    @Test
+//    public void test_initialiseAOCDetails_returns_invalid_format_when_astronomicalObjectClassificationCode_not_correct_format() throws invalidUserInputException {
+//        //arrange
+//        String userId = "AA1234";
+//        String password = "arby12345*/";
+//        String astronomicalObjectClassificationCode = "Ssun27TL";
+//        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+//        cut.initialiseAOCDetails(astronomicalObjectClassificationCode);
+//        //act
+//        boolean result = astronomicalObjectClassificationCode.matches("[A-Z][0-9]{0,8}[A-Z][a-z]{2}[0-9]{1,3}(T|M|B|L|TL)");
+//        //assert
+//        assertEquals(false, result);
+//    }
 
     @Test
     public void test_objectType_returns_valid_object() throws invalidObjectException {
@@ -153,7 +153,7 @@ public class SolarSystemInformationTest {
         String objectName = "Ceres";
         boolean expectedResult = true;
         SolarSystemInformation cut = new SolarSystemInformation(userId, password);
-        cut.getObjectName(objectName);
+        cut.getObjectName();
         //act
         boolean result = objectName.contains("Ceres");
         //assert
@@ -191,10 +191,38 @@ public class SolarSystemInformationTest {
         //assert
         assertEquals(expectedResult, result);
     }
-
+    @Test
+    public void EasyMockStatusInfo() throws invalidWebServiceDataFormatException, invalidUserInputException {
+        IAOC iaoc = EasyMock.createNiceMock(IAOC.class);
+        String expectedResult = "SSun27TL,Star,Sun,83950000000,695510,255440000000000000,198900000000000000000000000000";
+        EasyMock.expect(iaoc.getStatusInfo("SSun27TL")).andReturn(expectedResult);
+        EasyMock.replay(iaoc);
+        String userId = "AA1234";
+        String password = "arby12345*/";
+        SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        cut.initialiseAOCDetails("SSun27TL");
+        String result = cut.getObjectName();
+        assertEquals("Sun", result);
+    }
 }
 
-//@Test
-// public void
+  //  @Test
+    //public void invalid_web_service_data_format_exception_thrown_when_invalid_AOC_input() {
+      //  //arrange
+        //String userId = "AA1234";
+        //String password = "arby12345*/";
+        //String invalidAOC = "76gygfr21";
+        //SolarSystemInformation cut = new SolarSystemInformation(userId, password);
+        //cut.setAstronomicalObjectClassificationCode(invalidAOC);
+        //String expectedMessage = "Invalid AOC data format";
+        //act
+        //Exception exception = assertThrows(invalidUserInputException.class, cut::getAstronomicalObjectClassificationCode);
+        //String actualMessage = exception.getMessage();
+        //assert
+        //assertTrue(actualMessage.contains(expectedMessage));
+    //}
+//}
+
+
 
 
