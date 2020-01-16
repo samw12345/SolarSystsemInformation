@@ -16,14 +16,6 @@ public class SolarSystemInformation {
     public String objectName;
 
 
-    public String getObjectName(String objectName) {
-        return this.objectName;
-    }
-
-    private void setObjectName(String objectName) {
-        this.objectName = objectName;
-    }
-
     public List<String> getObjectType(List<String> objectType) throws invalidObjectException {
         return this.objectType;
     }
@@ -53,14 +45,28 @@ public class SolarSystemInformation {
         } else this.password = "invalid password length";
 
     }
-
-    public String initialiseAOCDetails(String astronomicalObjectClassificationCode) {
+    public String initialiseAOCDetails(String astronomicalObjectClassificationCode) throws invalidUserInputException {
+        String information;
         if (astronomicalObjectClassificationCode.matches("[A-Z][0-9]{0,8}[A-Z][a-z]{2}[0-9]{1,3}(T|M|B|L|TL)")) {
-            return astronomicalObjectClassificationCode;
+            WebServiceStub stub = new WebServiceStub();
+            stub.authenticate(getUserId(), getPassword());
+            information = stub.getStatus(astronomicalObjectClassificationCode);
         } else {
-            return "invalid format";
+            throw new invalidUserInputException("Invalid AOC data format");
         }
+        return information;
+    }
+    String setAstronomicalObjectClassificationCode(String astronomicalObjectClassificationCode) {
+        this.astronomicalObjectClassificationCode = astronomicalObjectClassificationCode;
+        return astronomicalObjectClassificationCode;
+    }
 
+    public String getObjectName(String objectName) {
+        return this.objectName;
+    }
+
+    private void setObjectName(String objectName) {
+        this.objectName = objectName;
     }
 
     public String toString() {
@@ -112,14 +118,6 @@ public class SolarSystemInformation {
         return astronomicalObjectClassificationCode;
     }
 
-    private String setAstronomicalObjectClassificationCode(String astronomicalObjectClassificationCode) {
-        this.astronomicalObjectClassificationCode = astronomicalObjectClassificationCode;
-        return astronomicalObjectClassificationCode;
-    }
-
-    public void getUserId() {
-    }
-
     public boolean getUserId(boolean b) {
         return b;
     }
@@ -134,6 +132,10 @@ public class SolarSystemInformation {
 
     private String setUserId(String userId) {
         this.userId = userId;
+        return userId;
+    }
+
+    private String getUserId() {
         return userId;
     }
 }
